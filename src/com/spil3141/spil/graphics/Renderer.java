@@ -39,6 +39,7 @@ public class Renderer {
 					int xx = x + xOffSet;
 //					if( xx < 0 || xx >= width) break;
 					int tileIndex = ((xx >> 4) & MAP_SIZE_MASK) + ((yy >> 4) & MAP_SIZE_MASK) * MAP_SIZE;
+					
 					pixels[x + ( y*width)] = this.tiles[tileIndex];
 				}  	
 			}
