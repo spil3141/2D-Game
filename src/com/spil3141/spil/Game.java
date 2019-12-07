@@ -17,6 +17,7 @@ import com.spil3141.spil.io.EventSystem;
 public class Game extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = 1L;
+	private static final int VERSION = 1;
 	public static int width = 300;
 	public static int height = width / 16 * 9;
 	public static int scale = 3;
@@ -51,7 +52,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public synchronized void start() {
-		System.out.println("Welcome to Spil Engine");
+		System.out.println("Welcome to Spil Engine V-" + VERSION);
 		this.running = true;
 		gameThread = new Thread(this,"Game Thread");
 		gameThread.start();
@@ -75,6 +76,10 @@ public class Game extends Canvas implements Runnable{
 		double delta = 0;
 		int frames = 0;
 		int updates = 0;
+		
+		//put the canvas in focus 
+		requestFocus();
+		
 		while(running) {
 			long now = System.nanoTime();
 			delta += (now - lastTime)/ns;
@@ -89,7 +94,7 @@ public class Game extends Canvas implements Runnable{
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				this.frame.setTitle("Spil Engine | " + "us: " + updates + " fps: " + frames);
-				System.out.println("up: " + updates + " fps: " + frames);
+//				System.out.println("up: " + updates + " fps: " + frames);
 				frames = 0;
 				updates = 0;
 			}
@@ -101,11 +106,11 @@ public class Game extends Canvas implements Runnable{
 	public void update() {
 		//Input CallBack
 		this.key.update();
-		if(this.key.right) this.x++;
-		if(this.key.left) this.x--;
+		if(this.key.right) this.x--;
+		if(this.key.left) this.x++;
 
-		if(this.key.up) this.y--;
-		if(this.key.down) this.y++;
+		if(this.key.up) this.y++;
+		if(this.key.down) this.y--;
 
 	}
 	
